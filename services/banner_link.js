@@ -16,7 +16,7 @@ async function getMultiple(page = 1){
   const offset = helper.getOffset(page, config.listPerPage);
   const rows = await db.query(
     `SELECT identifier, type, url, hyperlink
-    FROM banner_link LIMIT ${offset},${config.listPerPage}`
+    FROM banner_link`
   );
   const data = helper.emptyOrRows(rows);
   const meta = {page};
