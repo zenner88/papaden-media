@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 var bodyParser = require('body-parser')
-const youtube = require("./routes/youtube");
+const banner_link = require("./routes/banner_link");
 const images1 = require("./routes/images1");
 const images2 = require("./routes/images2");
 app.use(express.json());
@@ -38,7 +38,7 @@ app.use(function (req, res, next) {
 app.get("/", (req, res) => {
   res.json({ message: "ok" });
 });
-app.use("/youtube", youtube);
+app.use("/banner_link", banner_link);
 app.use("/upload-image1", images1);
 app.use("/upload-image2", images2);
 /* Error handler middleware */
