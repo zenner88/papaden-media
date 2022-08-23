@@ -29,12 +29,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 // for parsing multipart/form-data
 let multer = require('multer');
-let upload = multer();
-
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads');
+  },
+  filename: function (req, file, cb) {
+    cb(null, req.params.id+'.png');
+    console.log(req.params.id);
+  }
+});
+var upload = multer({ storage: storage });
 /* PUT banner_link */
 router.put('/:id', upload.single('file'), async function(req, res, next) {
-  console.log(req.body);
-  console.log(req.file);
+  const { filename: file } = req.file;
   try {
     res.json(await banner_link.update(req.params.id, req));
     } catch (err) {

@@ -6,6 +6,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const router = require('../routes/banner_link');
+const routers = express.Router();
 
 // upload FILE
 // parse application/json
@@ -71,29 +72,29 @@ async function update(identifier, banner_link){
   if (result.affectedRows) {
     message = 'banner_link updated successfully';
   }
-  if (result.affectedRows && banner_link.body.type == "image") {
-    console.log("upload in")
-    // upload FILE 1
-    // handle storage using multer
-    var storage = multer.diskStorage({
-      destination: function (req, file, cb) {
-        cb(null, 'uploads');
-      },
-      filename: function (req, file, cb) {
-        cb(null, `http://202.67.10.240:3000/images/"${identifier}".png`);
-      }
-    });
-    var upload = multer({ storage: storage });
+  // if (result.affectedRows && banner_link.body.type == "image") {
+  //   console.log("upload in")
+  //   // upload FILE 1
+  //   // handle storage using multer
+  //   var storage = multer.diskStorage({
+  //     destination: function (req, file, cb) {
+  //       cb(null, 'uploads');
+  //     },
+  //     filename: function (req, file, cb) {
+  //       cb(null, `"${identifier}".png`);
+  //     }
+  //   });
+  //   var upload = multer({ storage: storage });
 
-    // handle single file upload
-    router.post('/', upload.single('file'), (banner_link, res, next) => {
-      const file = banner_link.file;
-      if (!file) {
-        return res.status(400).send({ message: 'Please upload a file.' });
-      }
-      return res.send({ message: 'File uploaded successfully.', file });
-    });
-  }
+  //   // handle single file upload
+  //   app.post('/', upload.single('file'), (banner_link, res, next) => {
+  //     const file = banner_link.file;
+  //     if (!file) {
+  //        return res.status(400).send({ message: 'Please upload a file.' });
+  //     }
+  //     return res.send({ message: 'File uploaded successfully.', file });
+  //  });
+  // }
 
   return {message};
 }
