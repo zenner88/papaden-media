@@ -67,7 +67,14 @@ async function update(identifier, banner_link){
       SET type="${banner_link.body.type}", url="${banner_link.body.url}", hyperlink=""
       WHERE identifier="${identifier}"` 
     );
-  }
+    }else if(banner_link.body.type == "zoom"){
+      console.log(banner_link.body)
+      var result = await db.query(
+        `UPDATE banner_link 
+        SET type="${banner_link.body.type}", url="${banner_link.body.url}", hyperlink="${banner_link.body.hyperlink}"
+        WHERE identifier="${identifier}"` 
+      );
+      }
 
   let message = 'Error in updating banner_link';
 
