@@ -54,15 +54,17 @@ async function create(banner_link){
 
 async function update(identifier, banner_link){
   if (banner_link.body.type == "image"){
+    console.log(banner_link.body)
     var result = await db.query(
       `UPDATE banner_link 
       SET type="${banner_link.body.type}", hyperlink="${banner_link.body.hyperlink}", url=""
       WHERE identifier="${identifier}"` 
-    );
-  }else if(banner_link.type == "video"){
+      );
+    }else if(banner_link.body.type == "video"){
+    console.log(banner_link.body)
     var result = await db.query(
       `UPDATE banner_link 
-      SET type="${banner_link.type}", url="${banner_link.url}", hyperlink=""
+      SET type="${banner_link.body.type}", url="${banner_link.body.url}", hyperlink=""
       WHERE identifier="${identifier}"` 
     );
   }

@@ -41,7 +41,8 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 /* PUT banner_link */
 router.put('/:id', upload.single('file'), async function(req, res, next) {
-  const { filename: file } = req.file;
+  // console.log(req);
+    // const { filename: file } = req.file;
   try {
     res.json(await banner_link.update(req.params.id, req));
     } catch (err) {
