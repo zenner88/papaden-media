@@ -57,14 +57,14 @@ async function update(identifier, banner_link){
     console.log(banner_link.body)
     var result = await db.query(
       `UPDATE banner_link 
-      SET type="${banner_link.body.type}", hyperlink="${banner_link.body.hyperlink}", url=""
+      SET type="${banner_link.body.type}", hyperlink="${banner_link.body.hyperlink}", url="${banner_link.body.hyperlink}"
       WHERE identifier="${identifier}"` 
       );
     }else if(banner_link.body.type == "video"){
     console.log(banner_link.body)
     var result = await db.query(
       `UPDATE banner_link 
-      SET type="${banner_link.body.type}", url="${banner_link.body.url}", hyperlink=""
+      SET type="${banner_link.body.type}", url="${banner_link.body.url}", hyperlink="${banner_link.body.url}"
       WHERE identifier="${identifier}"` 
     );
     }else if(banner_link.body.type == "zoom"){
